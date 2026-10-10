@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ service.title }} | BuildPro Construction Capabilities{% endblock %}
+
+{% block content %}
+<!-- Subpage Banner -->
+<section class="subpage-banner" style="background-image: linear-gradient(135deg, rgba(15, 23, 42, 0.94), rgba(15, 23, 42, 0.85)), url('{{ service.image_url|default:"https://images.unsplash.com/photo-1541888946425-d0fbb18615f3?auto=format&fit=crop&w=1600&q=80" }}');">
+    <div class="container">
+        <span class="section-tag" style="background: rgba(245, 158, 11, 0.2); color: #f59e0b;">Specialized Discipline</span>
+        <h1>{{ service.title }}</h1>
+        <div class="breadcrumbs">
+            <a href="{% url 'home' %}">Home</a>
+            <i class="fas fa-chevron-right" style="font-size: 0.75rem;"></i>
+            <a href="{% url 'services' %}">Services</a>
+            <i class="fas fa-chevron-right" style="font-size: 0.75rem;"></i>
+            <span>{{ service.title }}</span>
+        </div>
+    </div>
+</section>
+
+<section class="section-padding">
+    <div class="container">
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 3.5rem;">
+            
+            <!-- Left: Main Service Content -->
+            <div>
+                <div style="margin-bottom: 2.5rem; border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-md);">
+                    <img src="{{ service.image_url|default:'https://images.unsplash.com/photo-1541888946425-d0fbb18615f3?auto=format&fit=crop&w=1200&q=80' }}" alt="{{ service.title }}" style="width: 100%; max-height: 480px; object-fit: cover;">
+                </div>
+
+                <h2 style="font-size: 2.2rem; margin-bottom: 1.25rem;">Service Scope & Technical Execution</h2>
+                <div style="font-size: 1.05rem; line-height: 1.8; color: #334155; margin-bottom: 2.5rem;">
+                    {{ service.full_description|linebreaks }}
+                </div>
+
+                <div style="background: var(--bg-white); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 2.5rem; margin-bottom: 3rem;">
+                    <h3 style="font-size: 1.4rem; margin-bottom: 1.25rem;">Core Deliverables & Standards</h3>
+                    <ul style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        {% for feature in service.features %}
+                        <li style="display: flex; align-items: center; gap: 0.75rem; font-size: 0.95rem; color: #475569;">
+                            <i class="fas fa-check-circle" style="color: var(--primary); font-size: 1.1rem;"></i>
+                            <span>{{ feature }}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <!-- Methodology / Workflow -->
+                <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem;">Our 4-Stage Construction Process</h3>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;">
+                    <div style="background: #ffffff; border: 1px solid var(--border-color); padding: 1.5rem; border-radius: var(--radius-sm); border-top: 3px solid var(--primary);">
+                        <strong style="color: var(--primary); font-size: 1.2rem; font-family: var(--font-heading);">01. Feasibility & BIM</strong>
+                        <p style="margin: 0.5rem 0 0; font-size: 0.88rem;">Digital 3D collision checking, site geotechnical surveys, and municipal zoning sign-off.</p>
+                    </div>
+                    <div style="background: #ffffff; border: 1px solid var(--border-color); padding: 1.5rem; border-radius: var(--radius-sm); border-top: 3px solid var(--primary);">
+                        <strong style="color: var(--primary); font-size: 1.2rem; font-family: var(--font-heading);">02. Procurement & Site Prep</strong>
+                        <p style="margin: 0.5rem 0 0; font-size: 0.88rem;">Critical path material sourcing, environmental barrier setup, and precision excavation.</p>
+                    </div>
+                    <div style="background: #ffffff; border: 1px solid var(--border-color); padding: 1.5rem; border-radius: var(--radius-sm); border-top: 3px solid var(--primary);">
+                        <strong style="color: var(--primary); font-size: 1.2rem; font-family: var(--font-heading);">03. Heavy Structural Build</strong>
+                        <p style="margin: 0.5rem 0 0; font-size: 0.88rem;">Steel/concrete erection, MEP installations, continuous third-party QA inspections.</p>
+                    </div>
+                    <div style="background: #ffffff; border: 1px solid var(--border-color); padding: 1.5rem; border-radius: var(--radius-sm); border-top: 3px solid var(--primary);">
+                        <strong style="color: var(--primary); font-size: 1.2rem; font-family: var(--font-heading);">04. Commissioning & Handover</strong>
+                        <p style="margin: 0.5rem 0 0; font-size: 0.88rem;">HVAC balancing, final certificate of occupancy filings, and comprehensive warranty binder.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Sidebar -->
+            <div>
+                <!-- Service Quick Contact Card -->
+                <div style="background: #0f172a; color: #ffffff; padding: 2.5rem 2rem; border-radius: var(--radius-md); box-shadow: var(--shadow-lg); margin-bottom: 2.5rem;">
+                    <div class="logo-icon" style="margin-bottom: 1rem;"><i class="{{ service.icon }}"></i></div>
+                    <h3 style="color: #ffffff; font-size: 1.35rem; margin-bottom: 0.5rem;">Consult on {{ service.title }}</h3>
+                    <p style="color: #94a3b8; font-size: 0.88rem; margin-bottom: 1.5rem;">
+                        Speak directly with our senior site director overseeing this division.
+                    </p>
+                    <a href="{% url 'contact' %}" class="btn btn-primary btn-block">
+                        <i class="fas fa-calendar-alt"></i> Schedule Site Consultation
+                    </a>
+                    <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, 0.1); font-size: 0.85rem; color: #cbd5e1;">
+                        <p style="margin-bottom: 0.4rem;"><i class="fas fa-phone-alt" style="color: var(--primary);"></i> Direct: {{ SITE_INFO.phone }}</p>
+                        <p style="margin-bottom: 0;"><i class="fas fa-envelope" style="color: var(--primary);"></i> {{ SITE_INFO.email }}</p>
+                    </div>
+                </div>
+
+                <!-- Related Services -->
+                <div style="background: #ffffff; border: 1px solid var(--border-color); padding: 2rem; border-radius: var(--radius-md);">
+                    <h3 style="font-size: 1.15rem; margin-bottom: 1.25rem;">Other Disciplines</h3>
+                    <ul class="widget-links">
+                        {% for rel in related_services %}
+                        <li style="margin-bottom: 0.75rem;">
+                            <a href="{{ rel.get_absolute_url }}" style="color: var(--secondary); font-size: 0.92rem; display: flex; align-items: center; justify-content: space-between;">
+                                <span><i class="fas fa-chevron-right" style="color: var(--primary); font-size: 0.75rem; margin-right: 0.5rem;"></i> {{ rel.title }}</span>
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Our Construction Services & Capabilities | BuildPro & Co.{% endblock %}
+
+{% block content %}
+<!-- Subpage Banner -->
+<section class="subpage-banner">
+    <div class="container">
+        <span class="section-tag" style="background: rgba(245, 158, 11, 0.2); color: #f59e0b;">Engineering Services</span>
+        <h1>Comprehensive Contracting Disciplines</h1>
+        <div class="breadcrumbs">
+            <a href="{% url 'home' %}">Home</a>
+            <i class="fas fa-chevron-right" style="font-size: 0.75rem;"></i>
+            <span>Services</span>
+        </div>
+    </div>
+</section>
+
+<!-- Services Grid -->
+<section class="section-padding">
+    <div class="container">
+        <div class="text-center" style="margin-bottom: 3.5rem;">
+            <span class="section-tag">End-to-End Delivery</span>
+            <h2 class="section-title">Built On Structural Rigor & Master Trades</h2>
+            <p class="section-subtitle center-block">
+                We manage the entire lifecycle of complex developments—from pre-construction permitting, geotechnical excavation, and high-tolerance steel framing to custom architectural interiors.
+            </p>
+        </div>
+
+        <div class="services-grid">
+            {% for s in services %}
+            <div class="service-card">
+                <div class="service-img-wrap">
+                    <img src="{{ s.image_url|default:'https://images.unsplash.com/photo-1541888946425-d0fbb18615f3?auto=format&fit=crop&w=600&q=80' }}" alt="{{ s.title }}">
+                    <div class="service-icon-floating">
+                        <i class="{{ s.icon }}"></i>
+                    </div>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title"><a href="{{ s.get_absolute_url }}">{{ s.title }}</a></h3>
+                    <p>{{ s.short_description }}</p>
+
+                    {% if s.features %}
+                    <ul class="service-features-list">
+                        {% for feat in s.features %}
+                        <li><i class="fas fa-check-circle"></i> {{ feat }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+
+                    <div class="service-footer">
+                        <a href="{{ s.get_absolute_url }}" class="link-arrow">
+                            Detailed Scope & Case Studies <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action Banner -->
+<section class="section-padding" style="background: #0f172a; color: #ffffff; text-align: center;">
+    <div class="container">
+        <span class="section-tag" style="background: rgba(245, 158, 11, 0.2); color: #f59e0b;">Pre-Construction Phase</span>
+        <h2 style="color: #ffffff; font-size: 2.4rem; margin-bottom: 1rem;">Need A Custom Engineering Review?</h2>
+        <p style="color: #94a3b8; max-width: 600px; margin: 0 auto 2rem;">
+            Our in-house architects and estimators will analyze your site surveys and CAD drafts to spot potential structural savings before breaking ground.
+        </p>
+        <a href="{% url 'home' %}#quote-section" class="btn btn-primary btn-lg">
+            <i class="fas fa-drafting-compass"></i> Request Engineering Review
+        </a>
+    </div>
+</section>
+{% endblock %}

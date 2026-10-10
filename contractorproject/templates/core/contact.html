@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact Us & Site Inquiries | BuildPro & Co.{% endblock %}
+
+{% block content %}
+<!-- Subpage Banner -->
+<section class="subpage-banner" style="background-image: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.85)), url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1600&q=80');">
+    <div class="container">
+        <span class="section-tag" style="background: rgba(245, 158, 11, 0.2); color: #f59e0b;">Connect With Us</span>
+        <h1>Headquarters & Field Dispatch</h1>
+        <div class="breadcrumbs">
+            <a href="{% url 'home' %}">Home</a>
+            <i class="fas fa-chevron-right" style="font-size: 0.75rem;"></i>
+            <span>Contact</span>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Info Grid & Form -->
+<section class="section-padding">
+    <div class="container">
+        <div style="display: grid; grid-template-columns: 1fr 1.3fr; gap: 4rem;">
+            
+            <!-- Left Info Cards -->
+            <div>
+                <span class="section-tag">Direct Communication</span>
+                <h2 class="section-title">Get In Touch With Our Engineering Office</h2>
+                <p style="margin-bottom: 2rem;">
+                    Whether submitting an RFP, scheduling a site feasibility survey, or requesting emergency structural response, our project management team is ready.
+                </p>
+
+                <div style="display: grid; gap: 1.5rem; margin-bottom: 2.5rem;">
+                    <div style="display: flex; gap: 1.25rem; background: #ffffff; padding: 1.5rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+                        <div class="why-icon"><i class="fas fa-map-marked-alt"></i></div>
+                        <div>
+                            <h4 style="font-size: 1.1rem; margin-bottom: 0.25rem;">Corporate Headquarters</h4>
+                            <p style="margin: 0; font-size: 0.9rem; color: #64748b;">{{ SITE_INFO.address }}</p>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 1.25rem; background: #ffffff; padding: 1.5rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+                        <div class="why-icon"><i class="fas fa-phone-alt"></i></div>
+                        <div>
+                            <h4 style="font-size: 1.1rem; margin-bottom: 0.25rem;">Direct Phone Lines</h4>
+                            <p style="margin: 0; font-size: 0.9rem; color: #64748b;">Main Office: {{ SITE_INFO.phone }}</p>
+                            <p style="margin: 0; font-size: 0.85rem; color: var(--primary-dark); font-weight: 600;">{{ SITE_INFO.emergency }}</p>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 1.25rem; background: #ffffff; padding: 1.5rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+                        <div class="why-icon"><i class="fas fa-envelope-open-text"></i></div>
+                        <div>
+                            <h4 style="font-size: 1.1rem; margin-bottom: 0.25rem;">Estimating & Proposals</h4>
+                            <p style="margin: 0; font-size: 0.9rem; color: #64748b;">{{ SITE_INFO.email }}</p>
+                            <p style="margin: 0; font-size: 0.85rem; color: #64748b;">bid-desk@buildproconstruction.com</p>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 1.25rem; background: #ffffff; padding: 1.5rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+                        <div class="why-icon"><i class="fas fa-clock"></i></div>
+                        <div>
+                            <h4 style="font-size: 1.1rem; margin-bottom: 0.25rem;">Operating Hours</h4>
+                            <p style="margin: 0; font-size: 0.9rem; color: #64748b;">{{ SITE_INFO.hours }}</p>
+                            <p style="margin: 0; font-size: 0.85rem; color: #64748b;">Sunday: Closed (Emergency Dispatch Available)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Contact Form -->
+            <div style="background: #ffffff; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 3rem; box-shadow: var(--shadow-md);">
+                <h3 style="font-size: 1.6rem; margin-bottom: 0.5rem;">Send A Direct Message</h3>
+                <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 2rem;">
+                    For RFP tender packages, architectural inquiries, or media, submit the form below.
+                </p>
+
+                <form method="POST" action="{% url 'contact' %}">
+                    {% csrf_token %}
+                    
+                    <div style="display: grid; gap: 1.25rem;">
+                        <div class="form-group">
+                            <label class="form-label" for="id_name" style="color: var(--secondary);">Your Full Name *</label>
+                            {{ form.name }}
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
+                            <div class="form-group">
+                                <label class="form-label" for="id_email" style="color: var(--secondary);">Email Address *</label>
+                                {{ form.email }}
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="id_phone" style="color: var(--secondary);">Phone Number</label>
+                                {{ form.phone }}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="id_subject" style="color: var(--secondary);">Subject / Project In reference to *</label>
+                            {{ form.subject }}
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="id_message" style="color: var(--secondary);">Your Detailed Message *</label>
+                            {{ form.message }}
+                        </div>
+
+                        <div style="margin-top: 1rem;">
+                            <button type="submit" class="btn btn-primary btn-block btn-lg">
+                                <i class="fas fa-paper-plane"></i> Send Message To Dispatch
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Frequently Asked Questions -->
+<section class="section-padding" style="background: #ffffff; border-top: 1px solid var(--border-color);">
+    <div class="container">
+        <div class="text-center" style="margin-bottom: 3.5rem;">
+            <span class="section-tag">Frequently Asked Questions</span>
+            <h2 class="section-title">General Contracting & Construction FAQs</h2>
+            <p class="section-subtitle center-block">
+                Clear answers regarding our bidding process, warranty guarantees, and site safety management.
+            </p>
+        </div>
+
+        <div style="max-width: 850px; margin: 0 auto; display: grid; gap: 1.25rem;">
+            <div style="border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.75rem; background: var(--bg-light);">
+                <h4 style="font-size: 1.15rem; margin-bottom: 0.5rem; color: var(--secondary);">
+                    <i class="fas fa-question-circle" style="color: var(--primary); margin-right: 0.5rem;"></i>
+                    How accurate is your preliminary Cost Estimator tool?
+                </h4>
+                <p style="margin: 0; font-size: 0.92rem; color: #475569;">
+                    The online calculator provides high-level directional feasibility based on current regional construction indices and average material square-foot rates. Once you provide preliminary blueprints, our pre-construction division produces a Guaranteed Maximum Price (GMP) with line-item trade breakdowns.
+                </p>
+            </div>
+
+            <div style="border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.75rem; background: var(--bg-light);">
+                <h4 style="font-size: 1.15rem; margin-bottom: 0.5rem; color: var(--secondary);">
+                    <i class="fas fa-question-circle" style="color: var(--primary); margin-right: 0.5rem;"></i>
+                    Does BuildPro handle municipal permits and zoning approvals?
+                </h4>
+                <p style="margin: 0; font-size: 0.92rem; color: #475569;">
+                    Yes, absolutely. Our turnkey general contracting includes submitting all structural calculations, fire department approvals, utility tie-in filings, and securing Certificates of Occupancy with local building departments.
+                </p>
+            </div>
+
+            <div style="border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.75rem; background: var(--bg-light);">
+                <h4 style="font-size: 1.15rem; margin-bottom: 0.5rem; color: var(--secondary);">
+                    <i class="fas fa-question-circle" style="color: var(--primary); margin-right: 0.5rem;"></i>
+                    What warranties and safety guarantees do you offer?
+                </h4>
+                <p style="margin: 0; font-size: 0.92rem; color: #475569;">
+                    All structural concrete, steel foundations, and roofing systems carry a comprehensive multi-year structural warranty alongside standard 1-year master builder craftsmanship warranties. All field teams adhere to OSHA 30 standards with full workers' compensation and \$10M+ general liability policies.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

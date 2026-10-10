@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Completed Projects Portfolio & Case Studies | BuildPro & Co.{% endblock %}
+
+{% block content %}
+<!-- Subpage Banner -->
+<section class="subpage-banner" style="background-image: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.85)), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=80');">
+    <div class="container">
+        <span class="section-tag" style="background: rgba(245, 158, 11, 0.2); color: #f59e0b;">Proven Track Record</span>
+        <h1>Construction Portfolio & Case Studies</h1>
+        <div class="breadcrumbs">
+            <a href="{% url 'home' %}">Home</a>
+            <i class="fas fa-chevron-right" style="font-size: 0.75rem;"></i>
+            <span>Projects</span>
+        </div>
+    </div>
+</section>
+
+<!-- Portfolio Content -->
+<section class="section-padding">
+    <div class="container">
+        <div class="text-center">
+            <span class="section-tag">Delivered On Time & Within Budget</span>
+            <h2 class="section-title">Explore Our Signature Developments</h2>
+            <p class="section-subtitle center-block">
+                From landmark corporate towers and high-tech logistics facilities to bespoke luxury residences and historic preservation.
+            </p>
+        </div>
+
+        <!-- Filter Buttons -->
+        <div class="portfolio-filters">
+            <button class="filter-btn active" data-filter="all">All Projects</button>
+            {% for cat in categories %}
+            <button class="filter-btn" data-filter="{{ cat.slug }}">{{ cat.name }}</button>
+            {% endfor %}
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="projects-grid">
+            {% for p in projects %}
+            <div class="project-card" data-category="{{ p.category.slug }}">
+                <div class="project-thumb">
+                    <img src="{{ p.image_url|default:'https://images.unsplash.com/photo-1541888946425-d0fbb18615f3?auto=format&fit=crop&w=600&q=80' }}" alt="{{ p.title }}">
+                    {% if p.category %}
+                    <span class="project-category-badge">{{ p.category.name }}</span>
+                    {% endif %}
+                    <div class="project-overlay-actions">
+                        <button class="action-circle-btn js-quick-view-btn" data-project-id="{{ p.id }}" title="Quick View Specs">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <a href="{{ p.get_absolute_url }}" class="action-circle-btn" title="View Full Project Study">
+                            <i class="fas fa-link"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="project-details">
+                    <div class="project-location"><i class="fas fa-map-marker-alt"></i> {{ p.location }}</div>
+                    <h3 class="project-title"><a href="{{ p.get_absolute_url }}">{{ p.title }}</a></h3>
+                    <p style="font-size: 0.9rem; color: #64748b;">{{ p.short_summary }}</p>
+                    <div class="project-meta-row">
+                        <div>Area: <strong>{{ p.area_sqft|default:"Custom" }}</strong></div>
+                        <div>Budget: <strong>{{ p.budget|default:"Confidential" }}</strong></div>
+                        <div>Year: <strong>{{ p.completion_year }}</strong></div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Bottom CTA -->
+<section class="section-padding" style="background: #ffffff; border-top: 1px solid var(--border-color); text-align: center;">
+    <div class="container">
+        <h2 style="font-size: 2.2rem; margin-bottom: 1rem;">Have A Specific Building Challenge?</h2>
+        <p style="color: #64748b; max-width: 600px; margin: 0 auto 2rem;">
+            Whether dealing with complex brownfield zoning, deep caisson foundations, or fast-track timelines, our senior engineers are ready to assist.
+        </p>
+        <a href="{% url 'contact' %}" class="btn btn-primary btn-lg">
+            <i class="fas fa-paper-plane"></i> Contact Our Estimators
+        </a>
+    </div>
+</section>
+{% endblock %}

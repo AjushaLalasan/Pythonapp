@@ -1,0 +1,523 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}BuildPro & Co. | Commercial, Residential & Civil Construction{% endblock %}
+
+{% block content %}
+
+<!-- 1. HERO SECTION -->
+<section class="hero-section">
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-certificate"></i> ISO 9001 & OSHA 30-Hour Certified Contractor
+            </div>
+            <h1 class="hero-title">
+                Building Tomorrow's <span>Landmarks</span> With Master Craftsmanship.
+            </h1>
+            <p class="hero-description">
+                From high-density commercial towers to bespoke architectural residences and civil infrastructure, BuildPro combines 25+ years of structural precision, uncompromising jobsite safety, and turnkey general contracting.
+            </p>
+            <div class="hero-actions">
+                <a href="#quote-section" class="btn btn-primary btn-lg">
+                    <i class="fas fa-file-contract"></i> Request Free Estimate
+                </a>
+                <a href="#calculator-section" class="btn btn-outline-white btn-lg">
+                    <i class="fas fa-calculator"></i> Cost Calculator
+                </a>
+            </div>
+
+            <!-- Trust Badges -->
+            <div class="hero-trust-bar">
+                <div class="trust-item">
+                    <i class="fas fa-shield-alt"></i> Fully Bonded & Insured
+                </div>
+                <div class="trust-item">
+                    <i class="fas fa-award"></i> Master Builder Guild
+                </div>
+                <div class="trust-item">
+                    <i class="fas fa-hard-hat"></i> Zero-Incident Protocol
+                </div>
+                <div class="trust-item">
+                    <i class="fas fa-clock"></i> Guaranteed Timelines
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 2. QUICK STATS BAR -->
+<section class="stats-section">
+    <div class="container">
+        <div class="stats-grid">
+            {% for s in stats %}
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="{{ s.icon }}"></i>
+                </div>
+                <div class="stat-info">
+                    <div class="stat-number">{{ s.number_value }}</div>
+                    <div class="stat-label">{{ s.label }}</div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-calendar-check"></i></div>
+                <div class="stat-info"><div class="stat-number">25+</div><div class="stat-label">Years of Excellence</div></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-building"></i></div>
+                <div class="stat-info"><div class="stat-number">380+</div><div class="stat-label">Completed Projects</div></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-hard-hat"></i></div>
+                <div class="stat-info"><div class="stat-number">95+</div><div class="stat-label">Field Engineers</div></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-shield-alt"></i></div>
+                <div class="stat-info"><div class="stat-number">100%</div><div class="stat-label">Safety Compliance</div></div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- 3. SERVICES SECTION -->
+<section class="section-padding" id="services-section">
+    <div class="container">
+        <div class="text-center">
+            <span class="section-tag">What We Build</span>
+            <h2 class="section-title">Specialized Construction Disciplines</h2>
+            <p class="section-subtitle center-block">
+                We deliver robust, code-compliant, and architecturally stunning developments across multiple construction sectors.
+            </p>
+        </div>
+
+        <div class="services-grid">
+            {% for service in featured_services %}
+            <div class="service-card">
+                <div class="service-img-wrap">
+                    <img src="{{ service.image_url|default:'https://images.unsplash.com/photo-1541888946425-d0fbb18615f3?auto=format&fit=crop&w=600&q=80' }}" alt="{{ service.title }}">
+                    <div class="service-icon-floating">
+                        <i class="{{ service.icon }}"></i>
+                    </div>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title"><a href="{{ service.get_absolute_url }}">{{ service.title }}</a></h3>
+                    <p>{{ service.short_description }}</p>
+
+                    {% if service.features %}
+                    <ul class="service-features-list">
+                        {% for feat in service.features|slice:":3" %}
+                        <li><i class="fas fa-check-circle"></i> {{ feat }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+
+                    <div class="service-footer">
+                        <a href="{{ service.get_absolute_url }}" class="link-arrow">
+                            Service Details & Specs <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="text-center" style="margin-top: 3.5rem;">
+            <a href="{% url 'services' %}" class="btn btn-outline-dark">
+                <i class="fas fa-th-large"></i> View All Capabilities
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- 4. INTERACTIVE CONSTRUCTION COST ESTIMATOR -->
+<section class="section-padding calculator-section" id="calculator-section">
+    <div class="container">
+        <div class="text-center">
+            <span class="section-tag">Interactive Planning</span>
+            <h2 class="section-title">Construction Cost Estimator</h2>
+            <p class="section-subtitle center-block">
+                Select your building parameters below to get an instant preliminary budget estimate and schedule projection for your site.
+            </p>
+        </div>
+
+        <div class="calc-container">
+            <!-- Inputs Pane -->
+            <div class="calc-inputs-pane">
+                
+                <!-- 1. Project Type -->
+                <div class="calc-group">
+                    <div class="calc-group-title">
+                        <i class="fas fa-building"></i> 1. Select Construction Type
+                    </div>
+                    <div class="calc-options-grid">
+                        <div class="calc-option-btn js-calc-type active" data-type="commercial">
+                            <i class="fas fa-city"></i>
+                            <span>Commercial</span>
+                        </div>
+                        <div class="calc-option-btn js-calc-type" data-type="residential">
+                            <i class="fas fa-home"></i>
+                            <span>Residential</span>
+                        </div>
+                        <div class="calc-option-btn js-calc-type" data-type="renovation">
+                            <i class="fas fa-hammer"></i>
+                            <span>Renovation</span>
+                        </div>
+                        <div class="calc-option-btn js-calc-type" data-type="industrial">
+                            <i class="fas fa-warehouse"></i>
+                            <span>Industrial</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Square Footage Slider -->
+                <div class="calc-group">
+                    <div class="slider-header">
+                        <div class="calc-group-title" style="margin-bottom:0;">
+                            <i class="fas fa-ruler-combined"></i> 2. Estimated Total Area
+                        </div>
+                        <span class="slider-val-badge" id="sqftBadge">3,500 sq ft</span>
+                    </div>
+                    <input type="range" class="range-slider" id="sqftSlider" min="500" max="25000" step="250" value="3500">
+                    <div style="display:flex; justify-content:space-between; font-size:0.78rem; color:#94a3b8; margin-top:0.4rem;">
+                        <span>500 sq ft (Compact)</span>
+                        <span>12,000 sq ft</span>
+                        <span>25,000+ sq ft (Estate/High-rise)</span>
+                    </div>
+                </div>
+
+                <!-- 3. Quality & Finishes Tier -->
+                <div class="calc-group">
+                    <div class="calc-group-title">
+                        <i class="fas fa-layer-group"></i> 3. Finish Grade & Material Spec
+                    </div>
+                    <div class="calc-options-grid">
+                        <div class="calc-option-btn js-calc-tier" data-tier="standard">
+                            <i class="fas fa-check"></i>
+                            <span>Standard Builder</span>
+                        </div>
+                        <div class="calc-option-btn js-calc-tier active" data-tier="premium">
+                            <i class="fas fa-star"></i>
+                            <span>Premium Spec</span>
+                        </div>
+                        <div class="calc-option-btn js-calc-tier" data-tier="luxury">
+                            <i class="fas fa-crown"></i>
+                            <span>Architectural Luxury</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Optional Upgrades -->
+                <div class="calc-group" style="margin-bottom:0;">
+                    <div class="calc-group-title">
+                        <i class="fas fa-plus-circle"></i> 4. Turnkey Engineering Add-Ons
+                    </div>
+                    <div class="calc-extras-grid">
+                        <label class="calc-checkbox-card">
+                            <input type="checkbox" class="js-calc-extra" data-cost="22000">
+                            <span>Solar & Net-Zero HVAC (+$22k)</span>
+                        </label>
+                        <label class="calc-checkbox-card">
+                            <input type="checkbox" class="js-calc-extra" data-cost="15000">
+                            <span>Smart Building Automation (+$15k)</span>
+                        </label>
+                        <label class="calc-checkbox-card">
+                            <input type="checkbox" class="js-calc-extra" data-cost="28000">
+                            <span>Deep Foundation Seismic Rig (+$28k)</span>
+                        </label>
+                        <label class="calc-checkbox-card">
+                            <input type="checkbox" class="js-calc-extra" data-cost="12000">
+                            <span>Landscape & Civil Drainage (+$12k)</span>
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Results Pane -->
+            <div class="calc-results-pane">
+                <div class="calc-result-header">
+                    <h3>Preliminary Estimate</h3>
+                    <p>Based on current labor indexes, material costs, and engineering scopes.</p>
+                </div>
+
+                <div class="estimate-box">
+                    <div class="estimate-label">Projected Budget Window</div>
+                    <div class="estimate-amount" id="calcEstimateDisplay">$650,000 - $780,000</div>
+                    <div class="estimate-timeline" id="calcTimelineDisplay">
+                        Estimated Timeline: <strong>6 - 9 Months</strong>
+                    </div>
+                </div>
+
+                <div class="estimate-specs">
+                    <div class="spec-row">
+                        <span>Selected Area:</span>
+                        <strong id="calcSpecArea">3,500 sq ft</strong>
+                    </div>
+                    <div class="spec-row">
+                        <span>Project Category:</span>
+                        <strong id="calcSpecType">Commercial</strong>
+                    </div>
+                    <div class="spec-row">
+                        <span>Finish Level:</span>
+                        <strong id="calcSpecTier">Premium Spec</strong>
+                    </div>
+                    <div class="spec-row">
+                        <span>Permits & PM:</span>
+                        <strong>Included in Estimate</strong>
+                    </div>
+                </div>
+
+                <div>
+                    <a href="#quote-section" id="applyEstimateToQuote" class="btn btn-primary btn-block">
+                        <i class="fas fa-arrow-down"></i> Apply to Quote Form
+                    </a>
+                    <p style="font-size:0.75rem; color:#64748b; text-align:center; margin-top:0.75rem;">
+                        *Estimates provide high-level directional feasibility. Formal contracts follow comprehensive blueprints and on-site engineering surveys.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 5. FEATURED PORTFOLIO PROJECTS -->
+<section class="section-padding" id="portfolio-section">
+    <div class="container">
+        <div class="text-center">
+            <span class="section-tag">Case Studies</span>
+            <h2 class="section-title">Featured Construction Projects</h2>
+            <p class="section-subtitle center-block">
+                Take an inside look at recent milestones built with engineering ingenuity and strict quality benchmarks.
+            </p>
+        </div>
+
+        <!-- Filter Buttons -->
+        <div class="portfolio-filters">
+            <button class="filter-btn active" data-filter="all">All Projects</button>
+            {% for cat in categories %}
+            <button class="filter-btn" data-filter="{{ cat.slug }}">{{ cat.name }}</button>
+            {% endfor %}
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="projects-grid">
+            {% for p in featured_projects %}
+            <div class="project-card" data-category="{{ p.category.slug }}">
+                <div class="project-thumb">
+                    <img src="{{ p.image_url|default:'https://images.unsplash.com/photo-1541888946425-d0fbb18615f3?auto=format&fit=crop&w=600&q=80' }}" alt="{{ p.title }}">
+                    {% if p.category %}
+                    <span class="project-category-badge">{{ p.category.name }}</span>
+                    {% endif %}
+                    <div class="project-overlay-actions">
+                        <button class="action-circle-btn js-quick-view-btn" data-project-id="{{ p.id }}" title="Quick View Specs">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <a href="{{ p.get_absolute_url }}" class="action-circle-btn" title="View Full Project Study">
+                            <i class="fas fa-link"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="project-details">
+                    <div class="project-location"><i class="fas fa-map-marker-alt"></i> {{ p.location }}</div>
+                    <h3 class="project-title"><a href="{{ p.get_absolute_url }}">{{ p.title }}</a></h3>
+                    <p style="font-size: 0.9rem; color: #64748b;">{{ p.short_summary|truncatewords:16 }}</p>
+                    <div class="project-meta-row">
+                        <div>Area: <strong>{{ p.area_sqft|default:"Custom" }}</strong></div>
+                        <div>Budget: <strong>{{ p.budget|default:"Confidential" }}</strong></div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="text-center" style="margin-top: 3.5rem;">
+            <a href="{% url 'projects' %}" class="btn btn-outline-dark">
+                <i class="fas fa-th"></i> Explore Complete Portfolio
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- 6. WHY CHOOSE US & SAFETY SECTION -->
+<section class="section-padding why-us-section">
+    <div class="container">
+        <div class="why-us-grid">
+            <div>
+                <span class="section-tag">The BuildPro Advantage</span>
+                <h2 class="section-title">Engineered For Longevity. Built With Integrity.</h2>
+                <p>
+                    Choosing the right contractor dictates the safety, durability, and commercial success of your asset. We maintain strict accountability across every trade, zero subcontractor substitution without approval, and real-time site logging.
+                </p>
+
+                <div class="why-features">
+                    <div class="why-feature-item">
+                        <div class="why-icon"><i class="fas fa-shield-virus"></i></div>
+                        <div class="why-info">
+                            <h4>Zero-Incident Safety Standards</h4>
+                            <p>Daily OSHA toolbox talks, certified site safety managers, and biometric worker verification across all gates.</p>
+                        </div>
+                    </div>
+                    <div class="why-feature-item">
+                        <div class="why-icon"><i class="fas fa-stopwatch"></i></div>
+                        <div class="why-info">
+                            <h4>Guaranteed Schedule Milestones</h4>
+                            <p>4D BIM scheduling with milestone penalties accepted in writing. We respect your operational launch deadlines.</p>
+                        </div>
+                    </div>
+                    <div class="why-feature-item">
+                        <div class="why-icon"><i class="fas fa-hand-holding-usd"></i></div>
+                        <div class="why-info">
+                            <h4>Open-Book Financial Transparency</h4>
+                            <p>No hidden change orders or surprise escalations. Full digital ledger visibility for all procurement and trades.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="why-media-card">
+                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80" alt="Site Superintendents Reviewing Blueprints" class="why-img-main">
+                <div class="badge-experience-floating">
+                    <strong>25+</strong>
+                    <span>Years of Uninterrupted<br>General Contracting</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 7. CLIENT TESTIMONIALS -->
+<section class="section-padding testimonials-section">
+    <div class="container">
+        <div class="text-center">
+            <span class="section-tag">Client Endorsements</span>
+            <h2 class="section-title">Trusted By Developers & Architects</h2>
+            <p class="section-subtitle center-block">
+                Read what commercial property managers, municipal officials, and private estate owners say about our construction execution.
+            </p>
+        </div>
+
+        <div class="testimonials-grid">
+            {% for t in testimonials %}
+            <div class="testimonial-card">
+                <div class="stars-rating">
+                    {% for _ in t.star_range %}<i class="fas fa-star"></i>{% endfor %}
+                    {% for _ in t.empty_star_range %}<i class="far fa-star"></i>{% endfor %}
+                </div>
+                <div class="testimonial-quote">"{{ t.quote }}"</div>
+                <div class="testimonial-client">
+                    <img src="{{ t.avatar_url|default:'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80' }}" alt="{{ t.client_name }}" class="client-avatar">
+                    <div class="client-info">
+                        <h5>{{ t.client_name }}</h5>
+                        <span>{{ t.company_or_role }}</span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- 8. REQUEST A QUOTE / LEAD CAPTURE SECTION -->
+<section class="section-padding quote-section" id="quote-section">
+    <div class="container">
+        <div class="quote-layout">
+            
+            <!-- Left Info -->
+            <div class="quote-left-info">
+                <span class="section-tag" style="background: rgba(245, 158, 11, 0.2); color: #f59e0b;">Let's Collaborate</span>
+                <h2 class="section-title">Ready To Break Ground On Your Next Project?</h2>
+                <p class="section-subtitle">
+                    Submit your preliminary specifications and our senior pre-construction estimators will review blueprints, conduct code evaluations, and deliver a detailed scope proposal.
+                </p>
+
+                <div class="quote-perks">
+                    <div class="perk-item">
+                        <div class="perk-icon"><i class="fas fa-clock"></i></div>
+                        <div>
+                            <strong>Rapid 24-Hour Scope Response</strong>
+                            <p style="margin:0; font-size:0.85rem; color:#94a3b8;">Detailed initial feedback from an active licensed engineer.</p>
+                        </div>
+                    </div>
+                    <div class="perk-item">
+                        <div class="perk-icon"><i class="fas fa-file-invoice"></i></div>
+                        <div>
+                            <strong>Complimentary Site Assessment</strong>
+                            <p style="margin:0; font-size:0.85rem; color:#94a3b8;">On-site geotechnical and zoning inspection at zero cost.</p>
+                        </div>
+                    </div>
+                    <div class="perk-item">
+                        <div class="perk-icon"><i class="fas fa-user-shield"></i></div>
+                        <div>
+                            <strong>Direct Master Builder Consultation</strong>
+                            <p style="margin:0; font-size:0.85rem; color:#94a3b8;">Direct dialogue with our executive management team.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Form -->
+            <div class="quote-form-card">
+                <h3>Request An Official Proposal</h3>
+                <p>Fill out the parameters below or attach your preliminary plan.</p>
+
+                <div id="quoteFormStatus"></div>
+
+                <form method="POST" action="{% url 'home' %}" id="ajaxQuoteForm">
+                    {% csrf_token %}
+                    <input type="hidden" name="quote_submit" value="1">
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label" for="id_full_name">Full Name *</label>
+                            {{ quote_form.full_name }}
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="id_email">Corporate / Personal Email *</label>
+                            {{ quote_form.email }}
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="id_phone">Direct Phone *</label>
+                            {{ quote_form.phone }}
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="id_project_type">Project Classification *</label>
+                            {{ quote_form.project_type }}
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="id_estimated_budget">Target Budget Range *</label>
+                            {{ quote_form.estimated_budget }}
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="id_timeframe">Target Start Date</label>
+                            {{ quote_form.timeframe }}
+                        </div>
+                        <div class="form-group-full">
+                            <label class="form-label" for="id_property_size">Estimated Area / Dimensions</label>
+                            {{ quote_form.property_size }}
+                        </div>
+                        <div class="form-group-full">
+                            <label class="form-label" for="id_site_location">Project Site Address or City</label>
+                            {{ quote_form.site_location }}
+                        </div>
+                        <div class="form-group-full">
+                            <label class="form-label" for="id_message">Scope Details & Architectural Notes *</label>
+                            {{ quote_form.message }}
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 2rem;">
+                        <button type="submit" class="btn btn-primary btn-block btn-lg">
+                            <i class="fas fa-paper-plane"></i> Submit Construction Proposal Request
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

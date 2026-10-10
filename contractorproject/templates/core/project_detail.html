@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ project.title }} | Construction Case Study{% endblock %}
+
+{% block content %}
+<!-- Subpage Banner -->
+<section class="subpage-banner" style="background-image: linear-gradient(135deg, rgba(15, 23, 42, 0.94), rgba(15, 23, 42, 0.85)), url('{{ project.image_url|default:"https://images.unsplash.com/photo-1541888946425-d0fbb18615f3?auto=format&fit=crop&w=1600&q=80" }}');">
+    <div class="container">
+        <span class="section-tag" style="background: rgba(245, 158, 11, 0.2); color: #f59e0b;">{{ project.category.name|default:"General Contracting" }}</span>
+        <h1>{{ project.title }}</h1>
+        <div class="breadcrumbs">
+            <a href="{% url 'home' %}">Home</a>
+            <i class="fas fa-chevron-right" style="font-size: 0.75rem;"></i>
+            <a href="{% url 'projects' %}">Projects</a>
+            <i class="fas fa-chevron-right" style="font-size: 0.75rem;"></i>
+            <span>{{ project.title }}</span>
+        </div>
+    </div>
+</section>
+
+<!-- Project Body -->
+<section class="section-padding">
+    <div class="container">
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 3.5rem;">
+            
+            <!-- Left: Case Study Narrative -->
+            <div>
+                <div style="border-radius: var(--radius-md); overflow: hidden; margin-bottom: 2.5rem; box-shadow: var(--shadow-lg);">
+                    <img src="{{ project.image_url|default:'https://images.unsplash.com/photo-1541888946425-d0fbb18615f3?auto=format&fit=crop&w=1200&q=80' }}" alt="{{ project.title }}" style="width: 100%; max-height: 520px; object-fit: cover;">
+                </div>
+
+                <h2 style="font-size: 2.2rem; margin-bottom: 1.25rem;">Project Overview & Execution</h2>
+                <div style="font-size: 1.05rem; line-height: 1.8; color: #334155; margin-bottom: 2.5rem;">
+                    {{ project.full_description|linebreaks }}
+                </div>
+
+                <!-- Engineering Challenge & Solution Boxes -->
+                {% if project.challenge or project.solution %}
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 3rem;">
+                    {% if project.challenge %}
+                    <div style="background: #fef2f2; border: 1px solid #fecaca; border-left: 4px solid #ef4444; border-radius: var(--radius-sm); padding: 2rem;">
+                        <h3 style="color: #991b1b; font-size: 1.25rem; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <i class="fas fa-exclamation-circle"></i> The Structural Challenge
+                        </h3>
+                        <p style="color: #7f1d1d; font-size: 0.95rem; margin: 0; line-height: 1.6;">
+                            {{ project.challenge }}
+                        </p>
+                    </div>
+                    {% endif %}
+
+                    {% if project.solution %}
+                    <div style="background: #ecfdf5; border: 1px solid #a7f3d0; border-left: 4px solid #10b981; border-radius: var(--radius-sm); padding: 2rem;">
+                        <h3 style="color: #065f46; font-size: 1.25rem; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <i class="fas fa-check-circle"></i> Engineering Solution
+                        </h3>
+                        <p style="color: #064e3b; font-size: 0.95rem; margin: 0; line-height: 1.6;">
+                            {{ project.solution }}
+                        </p>
+                    </div>
+                    {% endif %}
+                </div>
+                {% endif %}
+
+                <!-- Action Button -->
+                <div style="padding: 2.5rem; background: var(--bg-white); border: 1px solid var(--border-color); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem;">
+                    <div>
+                        <h4 style="margin-bottom: 0.25rem;">Planning a similar project?</h4>
+                        <p style="margin: 0; font-size: 0.9rem;">Connect with the lead project superintendent on this build.</p>
+                    </div>
+                    <a href="{% url 'home' %}#quote-section" class="btn btn-primary">
+                        <i class="fas fa-calculator"></i> Estimate Similar Build
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right: Project Specifications Sidebar -->
+            <div>
+                <div style="background: var(--bg-white); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 2.5rem 2rem; box-shadow: var(--shadow-sm); margin-bottom: 2rem;">
+                    <h3 style="font-size: 1.35rem; margin-bottom: 1.5rem; border-bottom: 2px solid var(--primary); padding-bottom: 0.5rem;">Project Data Sheet</h3>
+                    
+                    <div class="estimate-specs">
+                        <div class="spec-row">
+                            <span style="color: #64748b;">Client:</span>
+                            <strong>{{ project.client_name }}</strong>
+                        </div>
+                        <div class="spec-row">
+                            <span style="color: #64748b;">Location:</span>
+                            <strong>{{ project.location }}</strong>
+                        </div>
+                        <div class="spec-row">
+                            <span style="color: #64748b;">Discipline:</span>
+                            <strong>{{ project.category.name|default:"General Contracting" }}</strong>
+                        </div>
+                        <div class="spec-row">
+                            <span style="color: #64748b;">Gross Area:</span>
+                            <strong>{{ project.area_sqft|default:"N/A" }}</strong>
+                        </div>
+                        <div class="spec-row">
+                            <span style="color: #64748b;">Capital Budget:</span>
+                            <strong>{{ project.budget|default:"Confidential" }}</strong>
+                        </div>
+                        <div class="spec-row">
+                            <span style="color: #64748b;">Year Completed:</span>
+                            <strong>{{ project.completion_year }}</strong>
+                        </div>
+                        <div class="spec-row">
+                            <span style="color: #64748b;">Safety Record:</span>
+                            <strong style="color: #10b981;"><i class="fas fa-check"></i> Zero Lost-Time</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Related Projects in Same Category -->
+                {% if related_projects %}
+                <div style="background: #ffffff; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 2rem;">
+                    <h4 style="font-size: 1.15rem; margin-bottom: 1.25rem;">Similar Case Studies</h4>
+                    {% for rp in related_projects %}
+                    <div style="display: flex; gap: 1rem; margin-bottom: 1.25rem; align-items: center;">
+                        <img src="{{ rp.image_url }}" alt="{{ rp.title }}" style="width: 70px; height: 70px; object-fit: cover; border-radius: var(--radius-sm);">
+                        <div>
+                            <h5 style="font-size: 0.95rem; margin-bottom: 0.25rem;"><a href="{{ rp.get_absolute_url }}">{{ rp.title }}</a></h5>
+                            <span style="font-size: 0.8rem; color: #64748b;">{{ rp.location }}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+</section>
+{% endblock %}

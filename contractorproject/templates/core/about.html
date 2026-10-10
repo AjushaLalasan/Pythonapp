@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Us | BuildPro & Co. Construction Heritage & Safety{% endblock %}
+
+{% block content %}
+<!-- Subpage Banner -->
+<section class="subpage-banner" style="background-image: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.85)), url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1600&q=80');">
+    <div class="container">
+        <span class="section-tag" style="background: rgba(245, 158, 11, 0.2); color: #f59e0b;">Our Heritage</span>
+        <h1>Engineered Precision. Master Craftsmanship.</h1>
+        <div class="breadcrumbs">
+            <a href="{% url 'home' %}">Home</a>
+            <i class="fas fa-chevron-right" style="font-size: 0.75rem;"></i>
+            <span>About Us</span>
+        </div>
+    </div>
+</section>
+
+<!-- Story Section -->
+<section class="section-padding">
+    <div class="container">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
+            <div>
+                <span class="section-tag">Since 1999</span>
+                <h2 class="section-title">25 Years of Building Critical Infrastructure & High-Value Assets</h2>
+                <p style="font-size: 1.05rem; line-height: 1.8;">
+                    BuildPro & Co. was founded on a simple premise: large-scale construction requires absolute transparency, unwavering jobsite safety, and meticulous structural execution.
+                </p>
+                <p>
+                    Over a quarter-century, we have expanded from regional reinforced concrete foundations to full-scale general contracting, delivering award-winning corporate skyscrapers, high-end residential compounds, and municipal transportation arteries.
+                </p>
+
+                <div style="margin-top: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                    <div style="background: #ffffff; border: 1px solid var(--border-color); padding: 1.5rem; border-radius: var(--radius-sm);">
+                        <i class="fas fa-shield-alt" style="color: var(--primary); font-size: 2rem; margin-bottom: 0.75rem;"></i>
+                        <h4 style="font-size: 1.1rem; margin-bottom: 0.35rem;">Zero-Compromise Safety</h4>
+                        <p style="margin: 0; font-size: 0.85rem;">Mandatory OSHA 30 certifications for all field directors and daily equipment telemetry audits.</p>
+                    </div>
+                    <div style="background: #ffffff; border: 1px solid var(--border-color); padding: 1.5rem; border-radius: var(--radius-sm);">
+                        <i class="fas fa-balance-scale" style="color: var(--primary); font-size: 2rem; margin-bottom: 0.75rem;"></i>
+                        <h4 style="font-size: 1.1rem; margin-bottom: 0.35rem;">Financial Predictability</h4>
+                        <p style="margin: 0; font-size: 0.85rem;">Transparent digital ledgers, lump-sum GMP contracts, and verified material procurement.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <img src="https://images.unsplash.com/photo-1541888946425-d0fbb18615f3?auto=format&fit=crop&w=800&q=80" alt="Construction Excavation" style="border-radius: var(--radius-md); box-shadow: var(--shadow-xl); width: 100%;">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Safety & Certifications Ribbon -->
+<section class="section-padding" style="background: #0f172a; color: #ffffff;">
+    <div class="container">
+        <div class="text-center" style="margin-bottom: 3rem;">
+            <span class="section-tag" style="background: rgba(245, 158, 11, 0.2); color: #f59e0b;">Compliance & Credentials</span>
+            <h2 style="color: #ffffff; font-size: 2.3rem;">Licensed, Bonded & Master Certified</h2>
+            <p style="color: #94a3b8; max-width: 650px; margin: 0 auto;">
+                We maintain active licenses in good standing across all jurisdictions with top-tier bonding capacity.
+            </p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem;">
+            <div style="background: #1e293b; padding: 2rem; border-radius: var(--radius-sm); border-top: 3px solid var(--primary); text-align: center;">
+                <i class="fas fa-hard-hat" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                <h4 style="color: #ffffff; font-size: 1.15rem; margin-bottom: 0.5rem;">OSHA 30-Hour Verified</h4>
+                <p style="color: #94a3b8; font-size: 0.85rem; margin: 0;">Comprehensive on-site safety directors and emergency response protocols.</p>
+            </div>
+            <div style="background: #1e293b; padding: 2rem; border-radius: var(--radius-sm); border-top: 3px solid var(--primary); text-align: center;">
+                <i class="fas fa-leaf" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                <h4 style="color: #ffffff; font-size: 1.15rem; margin-bottom: 0.5rem;">USGBC LEED Accredited</h4>
+                <p style="color: #94a3b8; font-size: 0.85rem; margin: 0;">Certified green building practices and recycled materials compliance.</p>
+            </div>
+            <div style="background: #1e293b; padding: 2rem; border-radius: var(--radius-sm); border-top: 3px solid var(--primary); text-align: center;">
+                <i class="fas fa-award" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                <h4 style="color: #ffffff; font-size: 1.15rem; margin-bottom: 0.5rem;">ISO 9001:2015 Quality</h4>
+                <p style="color: #94a3b8; font-size: 0.85rem; margin: 0;">Standardized QA/QC inspections for structural concrete and steel erection.</p>
+            </div>
+            <div style="background: #1e293b; padding: 2rem; border-radius: var(--radius-sm); border-top: 3px solid var(--primary); text-align: center;">
+                <i class="fas fa-file-contract" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                <h4 style="color: #ffffff; font-size: 1.15rem; margin-bottom: 0.5rem;">\$50M+ Bonding Capacity</h4>
+                <p style="color: #94a3b8; font-size: 0.85rem; margin: 0;">Underwritten by institutional surety firms for major municipal works.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Leadership Team -->
+<section class="section-padding">
+    <div class="container">
+        <div class="text-center" style="margin-bottom: 3.5rem;">
+            <span class="section-tag">Executive Oversight</span>
+            <h2 class="section-title">Leadership In Field Engineering</h2>
+            <p class="section-subtitle center-block">
+                Our directors remain directly accessible on active jobsites, ensuring decisions are made with field reality in mind.
+            </p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 2rem;">
+            <div style="background: #ffffff; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); text-align: center;">
+                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=500&q=80" alt="Executive Director" style="height: 280px; width: 100%; object-fit: cover;">
+                <div style="padding: 1.75rem;">
+                    <h3 style="font-size: 1.25rem; margin-bottom: 0.25rem;">Alexander Vance, PE</h3>
+                    <p style="color: var(--primary-dark); font-weight: 700; font-size: 0.85rem; margin-bottom: 0.75rem;">Founder & Chief Executive Officer</p>
+                    <p style="font-size: 0.88rem; color: #64748b;">30+ years leading heavy commercial and seismic engineering projects across the country.</p>
+                </div>
+            </div>
+
+            <div style="background: #ffffff; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); text-align: center;">
+                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=500&q=80" alt="VP of Pre-Construction" style="height: 280px; width: 100%; object-fit: cover;">
+                <div style="padding: 1.75rem;">
+                    <h3 style="font-size: 1.25rem; margin-bottom: 0.25rem;">Elena Rostova, AIA</h3>
+                    <p style="color: var(--primary-dark); font-weight: 700; font-size: 0.85rem; margin-bottom: 0.75rem;">VP of Pre-Construction & Architecture</p>
+                    <p style="font-size: 0.88rem; color: #64748b;">Specialist in 4D BIM modeling, high-efficiency building envelopes, and zoning approvals.</p>
+                </div>
+            </div>
+
+            <div style="background: #ffffff; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); text-align: center;">
+                <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=500&q=80" alt="VP of Field Operations" style="height: 280px; width: 100%; object-fit: cover;">
+                <div style="padding: 1.75rem;">
+                    <h3 style="font-size: 1.25rem; margin-bottom: 0.25rem;">Marcus Gallagher</h3>
+                    <p style="color: var(--primary-dark); font-weight: 700; font-size: 0.85rem; margin-bottom: 0.75rem;">Director of Field Operations</p>
+                    <p style="font-size: 0.88rem; color: #64748b;">Supervises trade scheduling, heavy equipment logistics, and site safety officers.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

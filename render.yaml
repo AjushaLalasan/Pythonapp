@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: contractorproject
+    runtime: python
+    rootDir: contractorproject
+    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput
+    startCommand: python manage.py migrate --noinput && gunicorn contractorproject.wsgi:application --bind 0.0.0.0:$PORT
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
